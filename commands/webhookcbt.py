@@ -1,20 +1,24 @@
 import asyncio
 import aiohttp
+import colorama
+from colorama import Fore, init
+from pystyle import Center, Write, Colors, Colorate
 
 async def send_message(session, webhook_url, message_content, username, successful_messages, num_messages):
     payload = {'content': f'{message_content}', 'tts': False, 'username': username}
 
+    
     async with session.post(webhook_url, json=payload) as response:
         if response.status == 204:
             successful_messages += 1
-            print(f"Message sent successfully. ({successful_messages}/{num_messages})")
+            print(Colorate.Horizontal(Colors.blue_to_red, f"Message sent successfully. ({successful_messages}/{num_messages})"))
             return True
         elif response.status == 429:
-            print("Rate limited, retrying after 2 seconds...")
+            print(Colorate.Horizontal(Colors.blue_to_red, ("Rate limited, retrying after 2 seconds...")))
             await asyncio.sleep(2)
             return False
         else:
-            print("Failed to send message. Retrying...")
+            print(Colorate.Horizontal(Colors.blue_to_red, "Failed to send message. Retrying..."))
             return False
 
 async def webhook_spammer():
