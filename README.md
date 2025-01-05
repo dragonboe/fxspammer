@@ -1,2 +1,2 @@
 # fxspammer
-skidded asf I didn't make it
+MADE BY FRIDGE, PUBLIC TOOL FOR SPAMMING WEBHOOKS AND SHIT.
